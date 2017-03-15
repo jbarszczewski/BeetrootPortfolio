@@ -1,6 +1,6 @@
 {
   "name": "BeetrootPortfolio",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "test": "karma start ClientApp/test/karma.conf.js",
      "webpack-dev": "set NODE_ENV=development && webpack",

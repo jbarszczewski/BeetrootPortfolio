@@ -321,7 +321,7 @@ module.exports = "<div class='container-fluid'>\r\n    <div class='row'>\r\n    
 /* 13 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Coming soon!</h1>\r\n";
+module.exports = "<h1>Coming soon!!</h1>\r\n";
 
 /***/ }),
 /* 14 */
