@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d67da80cc1ef1154fc6b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e3300fb3b1cb1272f032"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -706,7 +706,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(34)(__webpack_require__.s = 34);
+/******/ 	return hotCreateRequire(36)(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -986,11 +986,11 @@ module.exports = (__webpack_require__(0))(334);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(31);
+__webpack_require__(33);
 var core_1 = __webpack_require__(1);
 var angular2_universal_1 = __webpack_require__(4);
 var app_module_1 = __webpack_require__(10);
-__webpack_require__(32);
+__webpack_require__(34);
 var rootElemTagName = 'app'; // Update this if you change your root component selector
 // Enable either Hot Module Reloading or production mode
 if (true) {
@@ -1034,7 +1034,7 @@ var options = {
   name: ''
 };
 if (true) {
-  var querystring = __webpack_require__(24);
+  var querystring = __webpack_require__(26);
   var overrides = querystring.parse(__resourceQuery.slice(1));
   if (overrides.path) options.path = overrides.path;
   if (overrides.timeout) options.timeout = overrides.timeout;
@@ -1154,11 +1154,11 @@ if (typeof window !== 'undefined') {
 }
 
 function createReporter() {
-  var strip = __webpack_require__(25);
+  var strip = __webpack_require__(27);
 
   var overlay;
   if (typeof document !== 'undefined' && options.overlay) {
-    overlay = __webpack_require__(28);
+    overlay = __webpack_require__(30);
   }
 
   var styles = {
@@ -1211,7 +1211,7 @@ function createReporter() {
   };
 }
 
-var processUpdate = __webpack_require__(29);
+var processUpdate = __webpack_require__(31);
 
 var customHandler;
 var subscribeAllHandler;
@@ -1276,7 +1276,7 @@ if (module) {
   };
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, "?path=%2F__webpack_hmr", __webpack_require__(33)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, "?path=%2F__webpack_hmr", __webpack_require__(35)(module)))
 
 /***/ }),
 /* 7 */
@@ -1492,11 +1492,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var router_1 = __webpack_require__(30);
+var router_1 = __webpack_require__(32);
 var angular2_universal_1 = __webpack_require__(4);
 var app_component_1 = __webpack_require__(11);
 var navmenu_component_1 = __webpack_require__(13);
 var home_component_1 = __webpack_require__(12);
+var projects_component_1 = __webpack_require__(14);
 var AppModule = (function () {
     function AppModule() {
     }
@@ -1508,13 +1509,15 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             navmenu_component_1.NavMenuComponent,
-            home_component_1.HomeComponent
+            home_component_1.HomeComponent,
+            projects_component_1.ProjectsComponent
         ],
         imports: [
             angular2_universal_1.UniversalModule,
             router_1.RouterModule.forRoot([
                 { path: '', redirectTo: 'home', pathMatch: 'full' },
                 { path: 'home', component: home_component_1.HomeComponent },
+                { path: 'projects', component: projects_component_1.ProjectsComponent },
                 { path: '**', redirectTo: 'home' }
             ])
         ]
@@ -1545,8 +1548,8 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'app',
-        template: __webpack_require__(19),
-        styles: [__webpack_require__(26)]
+        template: __webpack_require__(20),
+        styles: [__webpack_require__(28)]
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;
@@ -1574,7 +1577,7 @@ var HomeComponent = (function () {
 HomeComponent = __decorate([
     core_1.Component({
         selector: 'home',
-        template: __webpack_require__(20)
+        template: __webpack_require__(21)
     })
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
@@ -1602,8 +1605,8 @@ var NavMenuComponent = (function () {
 NavMenuComponent = __decorate([
     core_1.Component({
         selector: 'nav-menu',
-        template: __webpack_require__(21),
-        styles: [__webpack_require__(27)]
+        template: __webpack_require__(22),
+        styles: [__webpack_require__(29)]
     })
 ], NavMenuComponent);
 exports.NavMenuComponent = NavMenuComponent;
@@ -1611,6 +1614,34 @@ exports.NavMenuComponent = NavMenuComponent;
 
 /***/ }),
 /* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(1);
+var ProjectsComponent = (function () {
+    function ProjectsComponent() {
+    }
+    return ProjectsComponent;
+}());
+ProjectsComponent = __decorate([
+    core_1.Component({
+        selector: 'projects',
+        template: __webpack_require__(23)
+    })
+], ProjectsComponent);
+exports.ProjectsComponent = ProjectsComponent;
+
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
@@ -1624,7 +1655,7 @@ exports.push([module.i, "@media (max-width: 767px) {\r\n    /* On small screens,
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
@@ -1638,19 +1669,19 @@ exports.push([module.i, "li .glyphicon {\r\n    margin-right: 10px;\r\n}\r\n\r\n
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
-  XmlEntities: __webpack_require__(18),
-  Html4Entities: __webpack_require__(17),
+  XmlEntities: __webpack_require__(19),
+  Html4Entities: __webpack_require__(18),
   Html5Entities: __webpack_require__(3),
   AllHtmlEntities: __webpack_require__(3)
 };
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 var HTML_ALPHA = ['apos', 'nbsp', 'iexcl', 'cent', 'pound', 'curren', 'yen', 'brvbar', 'sect', 'uml', 'copy', 'ordf', 'laquo', 'not', 'shy', 'reg', 'macr', 'deg', 'plusmn', 'sup2', 'sup3', 'acute', 'micro', 'para', 'middot', 'cedil', 'sup1', 'ordm', 'raquo', 'frac14', 'frac12', 'frac34', 'iquest', 'Agrave', 'Aacute', 'Acirc', 'Atilde', 'Auml', 'Aring', 'Aelig', 'Ccedil', 'Egrave', 'Eacute', 'Ecirc', 'Euml', 'Igrave', 'Iacute', 'Icirc', 'Iuml', 'ETH', 'Ntilde', 'Ograve', 'Oacute', 'Ocirc', 'Otilde', 'Ouml', 'times', 'Oslash', 'Ugrave', 'Uacute', 'Ucirc', 'Uuml', 'Yacute', 'THORN', 'szlig', 'agrave', 'aacute', 'acirc', 'atilde', 'auml', 'aring', 'aelig', 'ccedil', 'egrave', 'eacute', 'ecirc', 'euml', 'igrave', 'iacute', 'icirc', 'iuml', 'eth', 'ntilde', 'ograve', 'oacute', 'ocirc', 'otilde', 'ouml', 'divide', 'Oslash', 'ugrave', 'uacute', 'ucirc', 'uuml', 'yacute', 'thorn', 'yuml', 'quot', 'amp', 'lt', 'gt', 'oelig', 'oelig', 'scaron', 'scaron', 'yuml', 'circ', 'tilde', 'ensp', 'emsp', 'thinsp', 'zwnj', 'zwj', 'lrm', 'rlm', 'ndash', 'mdash', 'lsquo', 'rsquo', 'sbquo', 'ldquo', 'rdquo', 'bdquo', 'dagger', 'dagger', 'permil', 'lsaquo', 'rsaquo', 'euro', 'fnof', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho', 'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho', 'sigmaf', 'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'thetasym', 'upsih', 'piv', 'bull', 'hellip', 'prime', 'prime', 'oline', 'frasl', 'weierp', 'image', 'real', 'trade', 'alefsym', 'larr', 'uarr', 'rarr', 'darr', 'harr', 'crarr', 'larr', 'uarr', 'rarr', 'darr', 'harr', 'forall', 'part', 'exist', 'empty', 'nabla', 'isin', 'notin', 'ni', 'prod', 'sum', 'minus', 'lowast', 'radic', 'prop', 'infin', 'ang', 'and', 'or', 'cap', 'cup', 'int', 'there4', 'sim', 'cong', 'asymp', 'ne', 'equiv', 'le', 'ge', 'sub', 'sup', 'nsub', 'sube', 'supe', 'oplus', 'otimes', 'perp', 'sdot', 'lceil', 'rceil', 'lfloor', 'rfloor', 'lang', 'rang', 'loz', 'spades', 'clubs', 'hearts', 'diams'];
@@ -1803,7 +1834,7 @@ module.exports = Html4Entities;
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 var ALPHA_INDEX = {
@@ -1964,25 +1995,31 @@ module.exports = XmlEntities;
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class='container-fluid'>\r\n    <div class='row'>\r\n        <div class='col-sm-3'>\r\n            <nav-menu></nav-menu>\r\n        </div>\r\n        <div class='col-sm-9 body-content'>\r\n            <router-outlet></router-outlet>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-module.exports = "<h1>Coming soon!</h1>\r\n";
-
-/***/ }),
 /* 21 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]=\"['/home']\">jbarszczewski</a>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/home']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Info\r\n                    </a>\r\n                </li>                \r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/home']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Projects\r\n                    </a>\r\n                </li>  \r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/home']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Contact\r\n                    </a>\r\n                </li>                 \r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<div class=\"container\">\r\n  <h1>Coming soon!</h1>\r\n</div>";
 
 /***/ }),
 /* 22 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]=\"['/home']\">jbarszczewski</a>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/home']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Home\r\n                    </a>\r\n                </li>                \r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/projects']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Projects\r\n                    </a>\r\n                </li>  \r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/contact']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Contact\r\n                    </a>\r\n                </li>                 \r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\r\n  <h1>Projects</h1>\r\n</div>";
+
+/***/ }),
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2073,7 +2110,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2165,18 +2202,18 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(22);
-exports.encode = exports.stringify = __webpack_require__(23);
+exports.decode = exports.parse = __webpack_require__(24);
+exports.encode = exports.stringify = __webpack_require__(25);
 
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2189,21 +2226,7 @@ module.exports = function (str) {
 
 
 /***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-        var result = __webpack_require__(14);
-
-        if (typeof result === "string") {
-            module.exports = result;
-        } else {
-            module.exports = result.toString();
-        }
-    
-
-/***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -2217,7 +2240,21 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 28 */
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+        var result = __webpack_require__(16);
+
+        if (typeof result === "string") {
+            module.exports = result;
+        } else {
+            module.exports = result.toString();
+        }
+    
+
+/***/ }),
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*eslint-env browser*/
@@ -2261,7 +2298,7 @@ var colors = {
 };
 ansiHTML.setColors(colors);
 
-var Entities = __webpack_require__(16).AllHtmlEntities;
+var Entities = __webpack_require__(17).AllHtmlEntities;
 var entities = new Entities();
 
 exports.showProblems =
@@ -2302,7 +2339,7 @@ function problemType (type) {
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2440,31 +2477,31 @@ module.exports = function(hash, moduleMap, options) {
 
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(332);
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(333);
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(335);
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(574);
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(7);
