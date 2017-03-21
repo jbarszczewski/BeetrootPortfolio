@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "test": "karma start ClientApp/test/karma.conf.js",
-     "webpack-dev": "set NODE_ENV=development && webpack",
+    "webpack-dev": "set NODE_ENV=development && webpack",
     "webpack-production": "set NODE_ENV=production && webpack",
     "build-dev": "npm run webpack-dev",
     "build-production": "npm run ngc && npm run webpack-production",
