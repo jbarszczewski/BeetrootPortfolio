@@ -16,13 +16,15 @@ import { Project } from '../models/project';
     this.options = new RequestOptions({ headers: this.headers });
   }
 
+public GetAllProjects(): Observable<Project[]> {
+  return this.http.get(`api/projects`)
+  .map(response => response.json() as Project[])
+  .catch(error => Observable.throw(error));
+}
+
   public GetProject(projectId: number): Observable<Project> {
     return this.http.get(`/api/projects/${projectId}`)
-      .map((res: Response) => {
-        return res.json() as Project;
-      })
-      .catch((error: any) => {
-        return Observable.throw(error);
-      })
+  .map(response => response.json() as Project)
+  .catch(error => Observable.throw(error));
   }
 }

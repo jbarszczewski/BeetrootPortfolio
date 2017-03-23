@@ -1,8 +1,8 @@
 ﻿<div class="container">
   <h1>Projects</h1>
-  <div>
-    <a [routerLink]="['/project']">
-      <span class='glyphicon glyphicon-home'></span> Project 1
+  <div *ngFor="let project of projects">
+    <a [routerLink]="['/project', project.id]">
+      <span class='glyphicon glyphicon-bookmark'></span> {{project.title}}
     </a>
   </div>
 </div>

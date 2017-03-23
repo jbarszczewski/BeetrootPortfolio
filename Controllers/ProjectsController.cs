@@ -35,10 +35,10 @@ namespace BeetrootPortfolio.Controllers
         {
             return new ProjectArticle
             {
-                Id = 1,
+                Id = id,
                 CreatedOn = DateTime.Now,
-                Title = "Testowy 1",
-                HtmlContent = "<div><p>Hello again!</p></div>"
+                Title = $"Testowy {id}",
+                HtmlContent = $"<div><h3>Hello again!</h3></br><p>This is project with id {id}.</p></div>"
             };
         }
 

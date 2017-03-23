@@ -26,7 +26,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'project', component: ProjectComponent },
+      { path: 'project/:id', component: ProjectComponent },
       { path: 'projects', component: ProjectsComponent },
       { path: '**', redirectTo: 'home' }
     ])
