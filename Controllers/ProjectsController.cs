@@ -2,44 +2,32 @@
 using Microsoft.AspNetCore.Mvc;
 using BeetrootPortfolio.Models;
 using System;
+using BeetrootPortfolio.Data;
 
 namespace BeetrootPortfolio.Controllers
 {
     [Route("api/[controller]")]
     public class ProjectsController : Controller
     {
+        private IProjectsRepository projectsRepository;
+
+        public ProjectsController(IProjectsRepository reporitory)
+        {
+            this.projectsRepository = reporitory;
+        }
+
         // GET: api/values
         [HttpGet]
-        public IEnumerable<ProjectArticle> Get()
+        public IEnumerable<Project> Get()
         {
-            return new ProjectArticle[] { new ProjectArticle
-            {
-                Id = 1,
-                CreatedOn = DateTime.Now,
-                Title = "Testowy 1",
-                HtmlContent = "<div><p>Hello!</p></div>"
-            },
-            new ProjectArticle
-            {
-                Id = 3,
-                CreatedOn = DateTime.Now.AddDays(4).AddHours(5).AddMinutes(43),
-                Title = "Testowy 3",
-                HtmlContent = "<div><p>Hello again!</p></div>"
-            }
-            };
+            return this.projectsRepository.GetProjectsAsync((p) => p != null ).Result;
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ProjectArticle Get(int id)
+        public Project Get(string id)
         {
-            return new ProjectArticle
-            {
-                Id = id,
-                CreatedOn = DateTime.Now,
-                Title = $"Testowy {id}",
-                HtmlContent = $"<div><h3>Hello again!</h3></br><p>This is project with id {id}.</p></div>"
-            };
+            return this.projectsRepository.GetProjectAsync(id).Result;
         }
 
         // POST api/values

@@ -1,3 +1,4 @@
+using BeetrootPortfolio.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -15,6 +16,7 @@ namespace BeetrootPortfolio
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("appsettings.private.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -24,8 +26,14 @@ namespace BeetrootPortfolio
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string endpoint = this.Configuration.GetValue<string>("databaseEndpoint");
+            string key = this.Configuration.GetValue<string>("databaseKey");
+            string databaseId = this.Configuration.GetValue<string>("databaseId");
+            string collectionId = this.Configuration.GetValue<string>("collectionId");
+
             // Add framework services.
             services.AddMvc();
+            services.AddScoped<IProjectsRepository, ProjectsRepository>((sp) => { return new ProjectsRepository(endpoint, key, databaseId, collectionId); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +45,8 @@ namespace BeetrootPortfolio
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
                     HotModuleReplacement = true
                 });
             }
