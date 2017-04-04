@@ -10,7 +10,8 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.2.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.4.3" />
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->

@@ -33,7 +33,12 @@ namespace BeetrootPortfolio
 
             // Add framework services.
             services.AddMvc();
-            services.AddScoped<IProjectsRepository, ProjectsRepository>((sp) => { return new ProjectsRepository(endpoint, key, databaseId, collectionId); });
+
+            // For documentDB
+            // services.AddScoped<IProjectsRepository, DocumentDBProjectsRepository>((sp) => { return new DocumentDBProjectsRepository(endpoint, key, databaseId, collectionId); });
+
+            // For MongoDB
+            services.AddScoped<IProjectsRepository, MongoDBProjectsRepository>((sp) => { return new MongoDBProjectsRepository(endpoint, databaseId, collectionId); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

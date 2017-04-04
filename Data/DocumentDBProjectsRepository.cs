@@ -12,13 +12,13 @@ using BeetrootPortfolio.Models;
 
 namespace BeetrootPortfolio.Data
 {
-    public class ProjectsRepository : IProjectsRepository
+    public class DocumentDBProjectsRepository : IProjectsRepository
     {
         private string databaseId;
         private string collectionId;
         private DocumentClient client;
 
-        public ProjectsRepository(string endpoint, string key, string databaseId, string collectionId)
+        public DocumentDBProjectsRepository(string endpoint, string key, string databaseId, string collectionId)
         {
             this.databaseId = databaseId;
             this.collectionId = collectionId;

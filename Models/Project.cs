@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BeetrootPortfolio.Models
+﻿namespace BeetrootPortfolio.Models
 {
     public class Project
     {

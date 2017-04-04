@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using BeetrootPortfolio.Models;
-using System;
 using BeetrootPortfolio.Data;
 
 namespace BeetrootPortfolio.Controllers
@@ -20,7 +19,8 @@ namespace BeetrootPortfolio.Controllers
         [HttpGet]
         public IEnumerable<Project> Get()
         {
-            return this.projectsRepository.GetProjectsAsync((p) => p != null ).Result;
+            var projects = this.projectsRepository.GetProjectsAsync(p => true).Result;          
+            return projects;
         }
 
         // GET api/values/5

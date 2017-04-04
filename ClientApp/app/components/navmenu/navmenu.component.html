@@ -26,7 +26,12 @@
                     <a [routerLink]="['/contact']">
                         <span class='glyphicon glyphicon-home'></span> Contact
                     </a>
-                </li>                 
+                </li>      
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/editor']">
+                        <span class='glyphicon glyphicon-home'></span> Editor
+                    </a>
+                </li>              
             </ul>
         </div>
     </div>
