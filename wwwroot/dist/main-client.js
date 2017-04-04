@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1c084110e7880f3983e6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0643d9bb684e9490beb5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -5754,12 +5754,17 @@ var ProjectService = (function () {
         this.options = new http_1.RequestOptions({ headers: this.headers });
     }
     ProjectService.prototype.GetAllProjects = function () {
-        return this.http.get("api/projects")
+        return this.http.get("api/projects", this.options)
             .map(function (response) { return response.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error); });
     };
     ProjectService.prototype.GetProject = function (projectId) {
-        return this.http.get("/api/projects/" + projectId)
+        return this.http.get("/api/projects/" + projectId, this.options)
+            .map(function (response) { return response.json(); })
+            .catch(function (error) { return Observable_1.Observable.throw(error); });
+    };
+    ProjectService.prototype.SaveProject = function (apiKey, project) {
+        return this.http.post("/api/projects", project, new http_1.RequestOptions({ headers: new http_1.Headers({ 'Content-Type': 'application/json', 'apiKey': apiKey }) }))
             .map(function (response) { return response.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error); });
     };
@@ -9290,7 +9295,9 @@ var EditorComponent = (function () {
         configurable: true
     });
     EditorComponent.prototype.onSubmit = function () {
-        this.project.id = 5;
+        var _this = this;
+        this.project.createdOn = Date.now();
+        this.projectService.SaveProject(this.apiKey, this.project).subscribe(function (res) { return _this.project = res; });
     };
     return EditorComponent;
 }());
@@ -9391,7 +9398,7 @@ var ProjectComponent = (function () {
     ProjectComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params
-            .switchMap(function (params) { return _this.projectService.GetProject(+params['id']); })
+            .switchMap(function (params) { return _this.projectService.GetProject(params['id']); })
             .subscribe(function (res) {
             _this.project = res;
         });
@@ -9860,7 +9867,7 @@ module.exports = "<div class=\"container\">\r\n    <a href=\"mailto:jakub.barszc
 /* 68 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <h1>Project Form</h1>\r\n    <div id=\"editor\"></div>\r\n    <p>{{diagnostic}}</p>\r\n    <form (ngSubmit)=\"onSubmit()\">\r\n        <div class=\"form-group\">\r\n            <label for=\"title\">Title</label>\r\n            <input type=\"text\" class=\"form-control\" id=\"title\" required\r\n                   [(ngModel)]=\"project.title\" name=\"title\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"htmlContent\">HTML content</label>\r\n            <input type=\"text\" class=\"form-control\" id=\"htmlContent\" required\r\n                   [(ngModel)]=\"project.htmlContent\" name=\"htmlContent\">\r\n        </div>\r\n        <button type=\"submit\" class=\"btn btn-success\">Save</button>\r\n    </form>    \r\n</div>";
+module.exports = "<div class=\"container\">\r\n    <h1>Project Form</h1>\r\n    <div id=\"editor\"></div>\r\n    <p>{{diagnostic}}</p>\r\n    <form (ngSubmit)=\"onSubmit()\">\r\n        <div class=\"form-group\">\r\n            <label for=\"title\">Title</label>\r\n            <input type=\"text\" class=\"form-control\" id=\"title\" required\r\n                   [(ngModel)]=\"project.title\" name=\"title\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"htmlContent\">HTML content</label>\r\n            <input type=\"text\" class=\"form-control\" id=\"htmlContent\" required\r\n                   [(ngModel)]=\"project.htmlContent\" name=\"htmlContent\">\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"apiKey\">API Key</label>\r\n            <input type=\"text\" class=\"form-control\" id=\"apiKey\" required\r\n                   [(ngModel)]=\"apiKey\" name=\"apiKey\">\r\n        </div>\r\n\r\n        <button type=\"submit\" class=\"btn btn-success\">Save</button>\r\n    </form>    \r\n</div>";
 
 /***/ }),
 /* 69 */

@@ -64,14 +64,16 @@ namespace BeetrootPortfolio.Data
             return results;
         }
 
-        public async Task CreateProjectAsync(Project item)
+        public async Task<Project> CreateProjectAsync(Project item)
         {
-            await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(databaseId, collectionId), item);
+            var document = await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(databaseId, collectionId), item);
+            return (Project)(dynamic)document;
         }
 
-        public async Task UpdateItemAsync(string id, Project item)
+        public async Task<Project> UpdateItemAsync(string id, Project item)
         {
-            await client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(databaseId, collectionId, id), item);
+            var document = await client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(databaseId, collectionId, id), item);
+            return (Project)(dynamic)document;
         }
 
         public async Task DeleteItemAsync(string id)

@@ -24,22 +24,22 @@ namespace BeetrootPortfolio.Data
             this.collection = this.database.GetCollection<Project>(this.collectionId);
         }
 
-        public async Task CreateProjectAsync(Project item)
-        {
+        public async Task<Project> CreateProjectAsync(Project item)
+        {            
+            item.Id = Guid.NewGuid().ToString();
             await this.collection.InsertOneAsync(item);
+            return item;
         }
 
         public async Task DeleteItemAsync(string id)
         {
-            await this.collection.FindOneAndDeleteAsync(project => project.Id == int.Parse(id));
+            await this.collection.FindOneAndDeleteAsync(project => project.Id == id);
         }
 
         public async Task<Project> GetProjectAsync(string id)
         {
-            int projectId;
-            if (int.TryParse(id, out projectId))
-                return await this.collection.Find(project => project.Id == projectId).FirstOrDefaultAsync();
-            return null;
+            return await this.collection.Find(project => project.Id == id).FirstOrDefaultAsync();
+
         }
 
         public async Task<IEnumerable<Project>> GetProjectsAsync(Expression<Func<Project, bool>> predicate)
@@ -47,11 +47,9 @@ namespace BeetrootPortfolio.Data
             return await this.collection.Find(predicate).ToListAsync();
         }
 
-        public async Task UpdateItemAsync(string id, Project item)
+        public async Task<Project> UpdateItemAsync(string id, Project item)
         {
-            int projectId;
-            if (int.TryParse(id, out projectId))
-                await this.collection.FindOneAndReplaceAsync(p => p.Id == projectId, item);            
+                return await this.collection.FindOneAndReplaceAsync(p => p.Id == id, item);
         }
     }
 }

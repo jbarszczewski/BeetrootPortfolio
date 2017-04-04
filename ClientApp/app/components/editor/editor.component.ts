@@ -10,12 +10,14 @@ import { Project } from '../../models/project';
 })
 export class EditorComponent {
     project: Project = new Project();
+    apiKey: string;
 
     get diagnostic() { return JSON.stringify(this.project); }
 
     constructor(private projectService: ProjectService) { }    
     
     onSubmit() {
-        this.project.id = 5;
+        this.project.createdOn = Date.now();
+        this.projectService.SaveProject(this.apiKey, this.project).subscribe((res: Project) => this.project = res);
     }
 }

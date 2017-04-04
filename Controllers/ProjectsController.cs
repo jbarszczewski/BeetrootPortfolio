@@ -32,8 +32,12 @@ namespace BeetrootPortfolio.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public Project Post([FromBody]Project project)
         {
+            if (!Request.Headers.ContainsKey("apiKey"))
+                return null;
+            var apiKey = Request.Headers["apiKey"];
+            return this.projectsRepository.CreateProjectAsync(project).Result;            
         }
     }
 }
