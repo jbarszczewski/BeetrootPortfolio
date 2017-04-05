@@ -4,24 +4,24 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BeetrootPortfolio.Models;
 using MongoDB.Driver;
+using Microsoft.Extensions.Options;
+using BeetrootPortfolio.Configuration;
 
 namespace BeetrootPortfolio.Data
 {
     public class MongoDBProjectsRepository : IProjectsRepository
     {
-        MongoClient client;
-        IMongoDatabase database;
-        IMongoCollection<Project> collection;
-        string databaseId;
-        string collectionId;
+        private PortfolioSettings settings;
+        private MongoClient client;
+        private IMongoDatabase database;
+        private IMongoCollection<Project> collection;
 
-        public MongoDBProjectsRepository(string connectionString, string databaseId, string collectionId)
+        public MongoDBProjectsRepository(IOptions<PortfolioSettings> settings)
         {
-            this.databaseId = databaseId;
-            this.collectionId = collectionId;
-            this.client = new MongoClient(connectionString);
-            this.database = this.client.GetDatabase(this.databaseId);
-            this.collection = this.database.GetCollection<Project>(this.collectionId);
+            this.settings = settings.Value;
+            this.client = new MongoClient(this.settings.DatabaseEndpoint);
+            this.database = this.client.GetDatabase(this.settings.DatabaseId);
+            this.collection = this.database.GetCollection<Project>(this.settings.CollectionId);
         }
 
         public async Task<Project> CreateProjectAsync(Project item)

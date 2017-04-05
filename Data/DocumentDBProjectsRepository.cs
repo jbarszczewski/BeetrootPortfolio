@@ -9,20 +9,20 @@ using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
 
 using BeetrootPortfolio.Models;
+using BeetrootPortfolio.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace BeetrootPortfolio.Data
 {
     public class DocumentDBProjectsRepository : IProjectsRepository
     {
-        private string databaseId;
-        private string collectionId;
+        private PortfolioSettings settings;
         private DocumentClient client;
 
-        public DocumentDBProjectsRepository(string endpoint, string key, string databaseId, string collectionId)
+        public DocumentDBProjectsRepository(IOptions<PortfolioSettings> settings)
         {
-            this.databaseId = databaseId;
-            this.collectionId = collectionId;
-            this.client = new DocumentClient(new Uri(endpoint), key);
+            this.settings = settings.Value;
+            this.client = new DocumentClient(new Uri(this.settings.DatabaseEndpoint), this.settings.DatabaseKey);
             CreateDatabaseIfNotExistsAsync().Wait();
             CreateCollectionIfNotExistsAsync().Wait();
         }
@@ -31,7 +31,7 @@ namespace BeetrootPortfolio.Data
         {
             try
             {
-                Document document = await client.ReadDocumentAsync(UriFactory.CreateDocumentUri(databaseId, collectionId, id));
+                Document document = await client.ReadDocumentAsync(UriFactory.CreateDocumentUri(this.settings.DatabaseId, this.settings.CollectionId, id));
                 return (Project)(dynamic)document;
             }
             catch (DocumentClientException e)
@@ -50,7 +50,7 @@ namespace BeetrootPortfolio.Data
         public async Task<IEnumerable<Project>> GetProjectsAsync(Expression<Func<Project, bool>> predicate)
         {
             IDocumentQuery<Project> query = client.CreateDocumentQuery<Project>(
-                UriFactory.CreateDocumentCollectionUri(databaseId, collectionId),
+                UriFactory.CreateDocumentCollectionUri(this.settings.DatabaseId, this.settings.CollectionId),
                 new FeedOptions { MaxItemCount = -1 })
                 .Where(predicate)
                 .AsDocumentQuery();
@@ -66,32 +66,32 @@ namespace BeetrootPortfolio.Data
 
         public async Task<Project> CreateProjectAsync(Project item)
         {
-            var document = await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(databaseId, collectionId), item);
+            var document = await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(this.settings.DatabaseId, this.settings.CollectionId), item);
             return (Project)(dynamic)document;
         }
 
         public async Task<Project> UpdateItemAsync(string id, Project item)
         {
-            var document = await client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(databaseId, collectionId, id), item);
+            var document = await client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(this.settings.DatabaseId, this.settings.CollectionId, id), item);
             return (Project)(dynamic)document;
         }
 
         public async Task DeleteItemAsync(string id)
         {
-            await client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(databaseId, collectionId, id));
+            await client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(this.settings.DatabaseId, this.settings.CollectionId, id));
         }
 
         private async Task CreateDatabaseIfNotExistsAsync()
         {
             try
             {
-                await client.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(databaseId));
+                await client.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(this.settings.DatabaseId));
             }
             catch (DocumentClientException e)
             {
                 if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    await client.CreateDatabaseAsync(new Database { Id = databaseId });
+                    await client.CreateDatabaseAsync(new Database { Id = this.settings.DatabaseId });
                 }
                 else
                 {
@@ -104,15 +104,15 @@ namespace BeetrootPortfolio.Data
         {
             try
             {
-                await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(databaseId, collectionId));
+                await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(this.settings.DatabaseId, this.settings.CollectionId));
             }
             catch (DocumentClientException e)
             {
                 if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
                     await client.CreateDocumentCollectionAsync(
-                        UriFactory.CreateDatabaseUri(databaseId),
-                        new DocumentCollection { Id = collectionId },
+                        UriFactory.CreateDatabaseUri(this.settings.DatabaseId),
+                        new DocumentCollection { Id = this.settings.CollectionId },
                         new RequestOptions { OfferThroughput = 400 });
                 }
                 else

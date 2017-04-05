@@ -1,3 +1,4 @@
+using BeetrootPortfolio.Configuration;
 using BeetrootPortfolio.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,19 +27,24 @@ namespace BeetrootPortfolio
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string endpoint = this.Configuration.GetValue<string>("databaseEndpoint");
-            string key = this.Configuration.GetValue<string>("databaseKey");
-            string databaseId = this.Configuration.GetValue<string>("databaseId");
-            string collectionId = this.Configuration.GetValue<string>("collectionId");
-
             // Add framework services.
             services.AddMvc();
+            services.AddOptions();
+            services.Configure<PortfolioSettings>(this.Configuration.GetSection("PortfolioSettings"));
 
-            // For documentDB
-            // services.AddScoped<IProjectsRepository, DocumentDBProjectsRepository>((sp) => { return new DocumentDBProjectsRepository(endpoint, key, databaseId, collectionId); });
-
-            // For MongoDB
-            services.AddScoped<IProjectsRepository, MongoDBProjectsRepository>((sp) => { return new MongoDBProjectsRepository(endpoint, databaseId, collectionId); });
+            switch (this.Configuration.GetValue<string>("PortfolioSettings:DatabaseType"))
+            {
+                case "DocumentDB":
+                    // For DocumentDB
+                    services.AddScoped<IProjectsRepository, DocumentDBProjectsRepository>();
+                    break;
+                case "MongoDB":
+                    // For MongoDB
+                    services.AddScoped<IProjectsRepository, MongoDBProjectsRepository>();
+                    break;
+                default:
+                    throw new System.Exception("No database specified.");
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

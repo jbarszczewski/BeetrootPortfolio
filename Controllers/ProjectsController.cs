@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using BeetrootPortfolio.Models;
 using BeetrootPortfolio.Data;
+using Microsoft.Extensions.Options;
+using BeetrootPortfolio.Configuration;
 
 namespace BeetrootPortfolio.Controllers
 {
@@ -9,35 +11,39 @@ namespace BeetrootPortfolio.Controllers
     public class ProjectsController : Controller
     {
         private IProjectsRepository projectsRepository;
+        private PortfolioSettings settings;
 
-        public ProjectsController(IProjectsRepository reporitory)
+        public ProjectsController(IProjectsRepository reporitory, IOptions<PortfolioSettings> settings)
         {
             this.projectsRepository = reporitory;
+            this.settings = settings.Value;
         }
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<Project> Get()
+        public IActionResult Get()
         {
-            var projects = this.projectsRepository.GetProjectsAsync(p => true).Result;          
-            return projects;
+            var projects = this.projectsRepository.GetProjectsAsync(p => true).Result;
+            return Ok(projects);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public Project Get(string id)
+        public IActionResult Get(string id)
         {
-            return this.projectsRepository.GetProjectAsync(id).Result;
+            return Ok(this.projectsRepository.GetProjectAsync(id).Result);
         }
 
         // POST api/values
         [HttpPost]
-        public Project Post([FromBody]Project project)
+        public IActionResult Post([FromBody]Project project)
         {
             if (!Request.Headers.ContainsKey("apiKey"))
-                return null;
+                return BadRequest("Missing 'apiKey' header.");
             var apiKey = Request.Headers["apiKey"];
-            return this.projectsRepository.CreateProjectAsync(project).Result;            
+            if (apiKey == this.settings.ApiKey)
+                return Ok(this.projectsRepository.CreateProjectAsync(project).Result);
+            return Unauthorized();
         }
     }
 }
