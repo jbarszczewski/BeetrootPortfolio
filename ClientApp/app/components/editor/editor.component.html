@@ -1,22 +1,22 @@
 ﻿<div class="container">
     <h1>Project Form</h1>
     <div id="editor"></div>
-    <p>{{diagnostic}}</p>
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" required
                    [(ngModel)]="project.title" name="title">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" required [(ngModel)="project.description" name="description"></textarea>
         </div>
         <div class="form-group">
             <label for="htmlContent">HTML content</label>
-            <input type="text" class="form-control" id="htmlContent" required
-                   [(ngModel)]="project.htmlContent" name="htmlContent">
+          <textarea class="form-control" id="htmlContent" required [(ngModel)]="project.htmlContent" name="htmlContent"></textarea>
         </div>
 
         <div class="form-group">
             <label for="apiKey">API Key</label>
-            <input type="text" class="form-control" id="apiKey" required
+            <input type="password" class="form-control" id="apiKey" required
                    [(ngModel)]="apiKey" name="apiKey">
         </div>
 

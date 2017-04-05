@@ -11,9 +11,7 @@ import { Project } from '../../models/project';
 export class EditorComponent {
     project: Project = new Project();
     apiKey: string;
-
-    get diagnostic() { return JSON.stringify(this.project); }
-
+  
     constructor(private projectService: ProjectService) { }    
     
     onSubmit() {

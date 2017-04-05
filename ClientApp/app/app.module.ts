@@ -7,7 +7,6 @@ import { UniversalModule } from 'angular2-universal';
 import { ProjectService } from './services/project.service';
 
 import { AppComponent } from './components/app/app.component';
-import { ContactComponent} from './components/contact/contact.component';
 import { EditorComponent } from './components/editor/editor.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -18,7 +17,6 @@ import { ProjectsComponent } from './components/projects/projects.component';
     bootstrap: [AppComponent],
     declarations: [
         AppComponent,
-        ContactComponent,
         EditorComponent,
         HomeComponent,
         NavMenuComponent,
@@ -31,7 +29,6 @@ import { ProjectsComponent } from './components/projects/projects.component';
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'contact', component: ContactComponent },
             { path: 'editor', component: EditorComponent },
             { path: 'home', component: HomeComponent },
             { path: 'project/:id', component: ProjectComponent },
