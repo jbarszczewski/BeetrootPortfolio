@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+
+import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 import { UniversalModule } from 'angular2-universal';
 
 import { ProjectService } from './services/project.service';
@@ -27,6 +30,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
         FormsModule,
         HttpModule,
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        RecaptchaModule.forRoot(),
+        RecaptchaFormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'editor', component: EditorComponent },
