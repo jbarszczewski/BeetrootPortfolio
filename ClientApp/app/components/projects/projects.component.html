@@ -1,8 +1,16 @@
 ﻿<div class="container">
   <h1>Projects</h1>
-  <div *ngFor="let project of projects">
-    <a [routerLink]="['/project', project.id]">
-      <span class='glyphicon glyphicon-bookmark'></span> {{project.title}}
-    </a>
+  <div class="cards-viewport">
+    <div *ngFor="let project of projects">
+      <div class="card">
+        <div class="front-card">
+          <h1 class="card-title">{{project.title}}</h1>
+        </div>
+        <div class="back-card">
+          <p class="card-description">{{project.description}}</p>
+          <a class="btn btn-primary btn-block card-button" role="button" [routerLink]="['/project', project.id]">Read more &raquo;</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

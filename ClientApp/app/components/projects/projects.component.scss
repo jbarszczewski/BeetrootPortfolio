@@ -1,0 +1,64 @@
+﻿$front_card_color: #808080;
+$back_card_color: #8a5151;
+$title_color: white;
+$description_color: white;
+$button_color: yellow;
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+.viewport {
+  margin: 10px auto 0;
+  width: 520px;
+}
+
+.card, .back-card, .front-card {
+  width: 250px;
+  height: 250px;
+  display: block;
+  float: left;
+  margin: 5px;
+  z-index: 1000;
+
+  .front-card {
+    position: absolute;
+    overflow: hidden;
+    z-index: 900;
+    background-color: $front_card_color;
+    @include transition(width .25s ease);
+
+    .card-title {
+      color: $title_color;
+      width: 220px;
+    }
+  }
+
+  .back-card {
+    position: absolute;
+    overflow: hidden;
+    z-index: 700;
+    background-color: $back_card_color;
+
+    .card-description {
+      color: $description_color;
+      width: 220px;
+    }
+
+    .card-button {
+      color: $button_color;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+
+  &:hover {
+    .front-card {
+      width: 0%;
+    }
+  }
+}
