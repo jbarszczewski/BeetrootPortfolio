@@ -11,6 +11,7 @@ import { Project } from '../../models/project';
 export class EditorComponent {
     project: Project = new Project();
     apiKey: string;
+    captcha?: string;
   
     constructor(private projectService: ProjectService) { }    
     
