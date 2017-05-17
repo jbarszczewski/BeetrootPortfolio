@@ -1,16 +1,28 @@
 ﻿<div class="container">
-  <h1>Projects</h1>
-  <div class="cards-viewport">
-    <div *ngFor="let project of projects">
-      <div class="card">
-        <div class="front-card">
-          <h1 class="card-title">{{project.title}}</h1>
+    <h1>Projects</h1>
+
+    <div class="outer-panel" [hidden]="!isLoading">
+        <div class="loading-icon">
+            <div class="loading-elements">
+                <div class="loading-element first-element"></div>
+                <div class="loading-element second-element"></div>
+                <div class="loading-element third-element"></div>
+                <div class="loading-element four-element"></div>
+            </div>
         </div>
-        <div class="back-card">
-          <p class="card-description">{{project.description}}</p>
-          <a class="btn btn-primary btn-block card-button" role="button" [routerLink]="['/project', project.id]">Read more &raquo;</a>
-        </div>
-      </div>
     </div>
-  </div>
+
+    <div class="cards-viewport" [hidden]="isLoading">
+        <div *ngFor="let project of projects">
+            <div class="card">
+                <div class="front-card">
+                    <h1 class="card-title">{{project.title}}</h1>
+                </div>
+                <div class="back-card">
+                    <p class="card-description">{{project.description}}</p>
+                    <a class="btn btn-primary btn-block card-button" role="button" [routerLink]="['/project', project.id]">Read more &raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

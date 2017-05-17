@@ -1,3 +1,5 @@
+$accent: #90CAF9;
+
 @media (max-width: 767px) {
     /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
     .body-content {
@@ -7,4 +9,91 @@
 
 h1 {
     color: gray;
+}
+
+.outer-panel {
+    width: 200px;
+    height: 200px;
+}
+
+.loading-icon {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+}
+
+.loading-elements {
+    width: 100px;
+    height: 100px;
+    animation: spin 4s infinite linear;
+}
+
+.loading-element {
+    height: 4px;
+    position: relative;
+    width: 4px;
+    background: $accent;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.125);
+}
+
+.first-element {
+    animation: squareMove 1s infinite ease-in-out;
+}
+
+.second-element {
+    animation: squareMove 1s infinite ease-in-out;
+    animation-delay: -.25s;
+}
+
+.third-element {
+    animation: squareMove 1s infinite ease-in-out;
+    animation-delay: -.5s;
+}
+
+.four-element {
+    animation: squareMove 1s infinite ease-in-out;
+    animation-delay: -.75s;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes squareMove {
+    0% {
+        top: 25%;
+        left: 25%;
+    }
+
+    25% {
+        top: 25%;
+        left: 75%;
+        transform: scale(3);
+    }
+
+    50% {
+        top: 75%;
+        left: 75%;
+    }
+
+    75% {
+        top: 75%;
+        left: 25%;
+    }
+
+    100% {
+        top: 25%;
+        left: 25px;
+        transform: scale(1);
+    }
 }

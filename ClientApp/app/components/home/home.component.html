@@ -1,3 +1,16 @@
 <div class="container">
-  <h1>Coming soon!</h1>
+  <h1>jbarszczewski</h1>
+
+    <div class="outer-panel" [hidden]="!isLoading">
+        <div class="loading-icon">
+            <div class="loading-elements">
+                <div class="loading-element first-element"></div>
+                <div class="loading-element second-element"></div>
+                <div class="loading-element third-element"></div>
+                <div class="loading-element four-element"></div>
+            </div>
+        </div>
+    </div>
+
+  <div [innerHtml]="bio" [hidden]="isLoading"></div>
 </div>

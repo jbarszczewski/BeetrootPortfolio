@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import { Project } from '../models/project';
+import { Info } from '../models/info';
 
 @Injectable() export class ProjectService {
     headers: Headers;
@@ -14,6 +15,12 @@ import { Project } from '../models/project';
     constructor(private http: Http) {
         this.headers = new Headers({ 'Content-Type': 'application/json' });
         this.options = new RequestOptions({ headers: this.headers });
+    }
+
+    public GetInfo(infoKey: string): Observable<Info> {
+        return this.http.get(`/api/projects/info/${infoKey}`, this.options)
+            .map(response => response.json() as Info)
+            .catch(error => Observable.throw(error));
     }
 
     public GetAllProjects(): Observable<Project[]> {

@@ -25,7 +25,7 @@ namespace BeetrootPortfolio.Data
         }
 
         public async Task<Project> CreateProjectAsync(Project item)
-        {            
+        {
             item.Id = Guid.NewGuid().ToString();
             await this.collection.InsertOneAsync(item);
             return item;
@@ -34,6 +34,12 @@ namespace BeetrootPortfolio.Data
         public async Task DeleteItemAsync(string id)
         {
             await this.collection.FindOneAndDeleteAsync(project => project.Id == id);
+        }
+
+        public async Task<Info> GetInfoAsync(string key)
+        {
+            var infoCollection = this.database.GetCollection<Info>(this.settings.InfoId);
+            return await infoCollection.Find(info => info.Key == key).FirstOrDefaultAsync();
         }
 
         public async Task<Project> GetProjectAsync(string id)
@@ -49,7 +55,7 @@ namespace BeetrootPortfolio.Data
 
         public async Task<Project> UpdateItemAsync(string id, Project item)
         {
-                return await this.collection.FindOneAndReplaceAsync(p => p.Id == id, item);
+            return await this.collection.FindOneAndReplaceAsync(p => p.Id == id, item);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using BeetrootPortfolio.Models;
 using BeetrootPortfolio.Data;
 using Microsoft.Extensions.Options;
@@ -19,7 +18,16 @@ namespace BeetrootPortfolio.Controllers
             this.settings = settings.Value;
         }
 
-        // GET: api/values
+        [HttpGet("info/{key}")]
+        public IActionResult GetInfo(string key)
+        {
+            var info = this.projectsRepository.GetInfoAsync(key).Result;
+            if (info == null)
+                return NotFound();
+            return Ok(info);
+        }
+
+        // GET: api
         [HttpGet]
         public IActionResult Get()
         {
@@ -27,14 +35,14 @@ namespace BeetrootPortfolio.Controllers
             return Ok(projects);
         }
 
-        // GET api/values/5
+        // GET api/5
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
             return Ok(this.projectsRepository.GetProjectAsync(id).Result);
         }
 
-        // POST api/values
+        // POST api
         [HttpPost]
         public IActionResult Post([FromBody]Project project)
         {

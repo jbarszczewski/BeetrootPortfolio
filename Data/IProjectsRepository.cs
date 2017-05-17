@@ -14,5 +14,6 @@ public interface IProjectsRepository
   Task<Project> CreateProjectAsync(Project item);
   Task<Project> UpdateItemAsync(string id, Project item);
   Task DeleteItemAsync(string id);
-}
+  Task<Info> GetInfoAsync(string key);
+  }
 }

@@ -11,11 +11,13 @@ import { Project } from '../../models/project';
 })
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
+  error: any;
+  isLoading: boolean = true;
 
   constructor(private projectService: ProjectService) {  }
   
     ngOnInit(): void {      
-    this.projectService.GetAllProjects()
-    .subscribe((res: Project[]) => this.projects = res);
+      this.projectService.GetAllProjects()
+        .subscribe((res: Project[]) => this.projects = res, (err: any) => this.error = err, () => this.isLoading = false);
     }
 }

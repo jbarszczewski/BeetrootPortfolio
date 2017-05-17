@@ -27,21 +27,38 @@ namespace BeetrootPortfolio.Data
             CreateCollectionIfNotExistsAsync().Wait();
         }
 
+
+        public Task<Info> GetInfoAsync(string key)
+        {
+            try {
+                return new Task<Info>(() => {
+                    Info doc = client.CreateDocumentQuery<Info>(
+                UriFactory.CreateDocumentCollectionUri(this.settings.DatabaseId, this.settings.InfoId),
+                new FeedOptions { MaxItemCount = -1 }).FirstOrDefault(info => info.Key == key);
+                    return doc;
+                });
+            }
+            catch (DocumentClientException e) {
+                if (e.StatusCode == System.Net.HttpStatusCode.NotFound) {
+                    return null;
+                }
+                else {
+                    throw;
+                }
+            }
+        }
+
         public async Task<Project> GetProjectAsync(string id)
         {
-            try
-            {
+            try {
                 Document document = await client.ReadDocumentAsync(UriFactory.CreateDocumentUri(this.settings.DatabaseId, this.settings.CollectionId, id));
                 return (Project)(dynamic)document;
             }
-            catch (DocumentClientException e)
-            {
-                if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
+            catch (DocumentClientException e) {
+                if (e.StatusCode == System.Net.HttpStatusCode.NotFound) {
                     return null;
                 }
-                else
-                {
+                else {
                     throw;
                 }
             }
@@ -56,8 +73,7 @@ namespace BeetrootPortfolio.Data
                 .AsDocumentQuery();
 
             List<Project> results = new List<Project>();
-            while (query.HasMoreResults)
-            {
+            while (query.HasMoreResults) {
                 results.AddRange(await query.ExecuteNextAsync<Project>());
             }
 
@@ -83,18 +99,14 @@ namespace BeetrootPortfolio.Data
 
         private async Task CreateDatabaseIfNotExistsAsync()
         {
-            try
-            {
+            try {
                 await client.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(this.settings.DatabaseId));
             }
-            catch (DocumentClientException e)
-            {
-                if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
+            catch (DocumentClientException e) {
+                if (e.StatusCode == System.Net.HttpStatusCode.NotFound) {
                     await client.CreateDatabaseAsync(new Database { Id = this.settings.DatabaseId });
                 }
-                else
-                {
+                else {
                     throw;
                 }
             }
@@ -102,21 +114,22 @@ namespace BeetrootPortfolio.Data
 
         private async Task CreateCollectionIfNotExistsAsync()
         {
-            try
-            {
+            try {
                 await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(this.settings.DatabaseId, this.settings.CollectionId));
+                await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(this.settings.DatabaseId, this.settings.InfoId));
             }
-            catch (DocumentClientException e)
-            {
-                if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
+            catch (DocumentClientException e) {
+                if (e.StatusCode == System.Net.HttpStatusCode.NotFound) {
                     await client.CreateDocumentCollectionAsync(
                         UriFactory.CreateDatabaseUri(this.settings.DatabaseId),
                         new DocumentCollection { Id = this.settings.CollectionId },
                         new RequestOptions { OfferThroughput = 400 });
+                    await client.CreateDocumentCollectionAsync(
+                       UriFactory.CreateDatabaseUri(this.settings.DatabaseId),
+                       new DocumentCollection { Id = this.settings.InfoId },
+                       new RequestOptions { OfferThroughput = 400 });
                 }
-                else
-                {
+                else {
                     throw;
                 }
             }

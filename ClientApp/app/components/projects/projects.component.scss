@@ -2,7 +2,8 @@
 $back_card_color: #8a5151;
 $title_color: white;
 $description_color: white;
-$button_color: yellow;
+$button_background_color: #0846b6;
+$button_foreground_color: yellow;
 
 @mixin transition($args...) {
   -webkit-transition: $args;
@@ -50,7 +51,7 @@ $button_color: yellow;
     }
 
     .card-button {
-      color: $button_color;
+      color: $button_foreground_color;
       position: absolute;
       bottom: 0;
     }
