@@ -1,4 +1,7 @@
-$accent: #90CAF9;
+$background: #EFEFEF;
+$text: #323232;
+$highlight_text: #565656;
+$accent: #FF3B3F;
 
 @media (max-width: 767px) {
     /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
@@ -7,8 +10,25 @@ $accent: #90CAF9;
     }
 }
 
-h1 {
-    color: gray;
+.jumbotron {
+    p {
+        color: $text;
+    }
+
+    h1 {
+        color: $highlight_text;
+    }
+}
+
+a {
+    color: $accent;
+}
+
+a:hover {
+    color: $accent;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: bold;
 }
 
 .outer-panel {

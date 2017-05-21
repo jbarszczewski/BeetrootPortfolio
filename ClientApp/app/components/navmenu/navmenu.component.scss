@@ -1,0 +1,19 @@
+$background: #EFEFEF;
+$text: #323232;
+$highlight_text: #565656;
+$accent: #FF3B3F;
+
+li {
+    a {
+        color: $text;
+    }
+
+    a:active, a:hover {
+        color: $accent;
+    }
+}
+
+li.link-active a:hover,
+li.link-active a:focus {
+    color: $accent;
+}

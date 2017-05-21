@@ -1,23 +1,23 @@
 ﻿<div class="container">
-    <h1>Project Form</h1>
+    <h1>project editor</h1>
     <div id="editor"></div>
     <form (ngSubmit)="onSubmit()" #captchaProtectedForm="ngForm">
         <div class="form-group">
-            <label for="title">Title</label>
+            <label for="title">title</label>
             <input type="text" class="form-control" id="title" required
                    [(ngModel)]="project.title" name="title">
         </div>
         <div class="form-group">
-            <label for="description">Description</label>
+            <label for="description">description</label>
             <textarea class="form-control" id="description" required [(ngModel)]="project.description" name="description"></textarea>
         </div>
         <div class="form-group">
-            <label for="htmlContent">HTML content</label>
-            <textarea class="form-control" id="htmlContent" required [(ngModel)]="project.htmlContent" name="htmlContent"></textarea>
+            <label for="htmlContent">html content</label>
+            <textarea class="form-control" id="htmlContent" required [(ngModel)]="project.htmlContent" name="htmlContent" style="height: 250px"></textarea>
         </div>
 
         <div class="form-group">
-            <label for="apiKey">API Key</label>
+            <label for="apiKey">api Key</label>
             <input type="password" class="form-control" id="apiKey" required
                    [(ngModel)]="apiKey" name="apiKey">
         </div>

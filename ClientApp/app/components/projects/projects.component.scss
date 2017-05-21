@@ -1,9 +1,9 @@
-﻿$front_card_color: #808080;
-$back_card_color: #8a5151;
-$title_color: white;
-$description_color: white;
-$button_background_color: #0846b6;
-$button_foreground_color: yellow;
+﻿$front_card_color: #565656;
+$back_card_color: #AFAFAF;
+$title_color: #AFAFAF;
+$description_color: #565656;
+$button_background_color: #565656;
+$button_foreground_color: #FF3B3F;
 
 @mixin transition($args...) {
   -webkit-transition: $args;
@@ -19,47 +19,52 @@ $button_foreground_color: yellow;
 }
 
 .card, .back-card, .front-card {
-  width: 250px;
-  height: 250px;
-  display: block;
-  float: left;
-  margin: 5px;
-  z-index: 1000;
+    width: 250px;
+    height: 250px;
+    display: block;
+    float: left;
+    margin: 5px;
+    z-index: 1000;
+    border-radius: 3px;
 
-  .front-card {
-    position: absolute;
-    overflow: hidden;
-    z-index: 900;
-    background-color: $front_card_color;
-    @include transition(width .25s ease);
-
-    .card-title {
-      color: $title_color;
-      width: 220px;
-    }
-  }
-
-  .back-card {
-    position: absolute;
-    overflow: hidden;
-    z-index: 700;
-    background-color: $back_card_color;
-
-    .card-description {
-      color: $description_color;
-      width: 220px;
-    }
-
-    .card-button {
-      color: $button_foreground_color;
-      position: absolute;
-      bottom: 0;
-    }
-  }
-
-  &:hover {
     .front-card {
-      width: 0%;
+        position: absolute;
+        overflow: hidden;
+        z-index: 900;
+        background-color: $front_card_color;
+        @include transition(width .25s ease);
+
+        .card-title {
+            color: $title_color;
+            width: 220px;
+            word-wrap: break-word;
+        }
     }
-  }
+
+    .back-card {
+        position: absolute;
+        overflow: hidden;
+        z-index: 700;
+        background-color: $back_card_color;
+
+        .card-description {
+            margin:5px;
+            color: $description_color;
+            width: 200px;
+        }
+
+        .card-button {
+            border-radius: 0px;
+            background-color: $button_background_color;
+            color: $button_foreground_color;
+            position: absolute;
+            bottom: 0;
+        }
+    }
+
+    &:hover {
+        .front-card {
+            width: 0%;
+        }
+    }
 }

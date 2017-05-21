@@ -8,7 +8,8 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'home',
-    templateUrl: './home.component.html'
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
     bio: string = "Gathering personal data...";
